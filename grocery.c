@@ -32,8 +32,6 @@ int main(void)
 void menu(void)
 {
 
-	int number = 0;
-
 	/*
 	 * number = 1 // Refrierator
 	 * number = 2 // Freezer
@@ -43,6 +41,7 @@ void menu(void)
 	while(1)
 	{
 		int reply;
+		int number;
 
 		puts("\n1. for Fridge\n2. for Freezer\n3. for dry shelve\n4. Add/Remove Entry\n5. Exit Program\n");
 		scanf("%d", &reply);
@@ -161,6 +160,7 @@ void write_func(void)
 		puts("\n");
 		printf("a. Add Entry\n");
 		printf("b. Remove Entry\n");
+		printf("c. Return to Main Menu\n");
 
 		char choice;
 
@@ -170,6 +170,8 @@ void write_func(void)
 			add_entry();
 		else if (choice == 'b')
 			remove_entry();
+		else if (choice == 'c')
+			return;
 		else
 			printf("Invalid choice.\n");
 	}
@@ -193,33 +195,65 @@ void add_entry(void)
 	puts("\n1. for Fridge\n2. for Freezer\n3. for dry shelve\n");
 	scanf("%d",  &number);
 
+
 	if (number == 1)
 	{
+		while ((getchar()) != '\n');
+
 		printf("Enter item to add (%d): ", number);
 
 		fgets(fridge_string, 20, stdin);
-		fputs(fridge_string, fp);
-		 
+
+		printf("You entered: ");
+		puts(fridge_string);
+		
+		fprintf(fp, "%s", fridge_string);   // print to text file
+
+		fclose (fp);
+
 		return;
 	}
 
 	else if (number == 2)
 	{
+		while ((getchar()) != '\n');
+
 		printf("Enter item to add (%d): ", number);
 
-		menu();
+		fgets(freezer_string, 20, stdin);
+
+		printf("You entered: ");
+		puts(freezer_string);
+
+		fprintf(fp2, "%s", freezer_string);   // print to text file
+
+		fclose (fp2);
+
+		return;
 	}
 
 	else if (number == 3)
 	{
+		while ((getchar()) != '\n');
+
 		printf("Enter item to add (%d): ", number);
 
-		menu();
+		fgets(dry_string, 20, stdin);
+
+		printf("You enterd: ");
+		puts(dry_string);
+
+		fprintf(fp3, "%s", dry_string);   // print to text file
+
+		fclose (fp3);
+
+		return;
 	}
 
 	else
 	{
 		printf("Incorrect Entry\n");
+
 		add_entry();
 	}
 }
@@ -249,7 +283,7 @@ void remove_entry(void)
 		exit(0);
 	}
 
-	puts("\n1. for Fridge\n2. for Freezer\n3. for dry shelve\n");
+	puts("\n1. for Fridge\n2. for Freezer\n3. for dry shelve\n4.For Main Menu");
 	scanf("%d", &number);
 	
 
@@ -313,7 +347,7 @@ void remove_entry(void)
 	{
 		// Freezer (2) option (FREEZER.TXT)
 
-		while(fgets(str, MAXCHAR, fp) != NULL)
+		while(fgets(str, MAXCHAR, fp2) != NULL)
 		{
 			printf("%s", str);
 		}
@@ -410,7 +444,11 @@ void remove_entry(void)
 		}
 
 		fclose(fp3);
+	}
 
-		menu();
+		// menu()
+	else if (number == 4)
+	{
+		return;
 	}
 }
