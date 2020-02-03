@@ -196,26 +196,16 @@ void add_entry(void)
 	if (number == 1)
 	{
 		printf("Enter item to add (%d): ", number);
-		scanf("%s", fridge_string);
 
-		fprintf(fp, "%s\n", fridge_string);
-
-		fclose(fp);
-		printf("\nADDED: %s\n", fridge_string);
-
-		menu();
+		fgets(fridge_string, 20, stdin);
+		fputs(fridge_string, fp);
+		 
+		return;
 	}
 
 	else if (number == 2)
 	{
 		printf("Enter item to add (%d): ", number);
-		scanf("%s", freezer_string);
-
-		fprintf(fp2, "%s\n", freezer_string);
-
-		fclose(fp2);
-
-		printf("\nADDED: %s\n", freezer_string);
 
 		menu();
 	}
@@ -223,13 +213,6 @@ void add_entry(void)
 	else if (number == 3)
 	{
 		printf("Enter item to add (%d): ", number);
-		scanf("%s", dry_string);
-
-		fprintf(fp3, "%s\n", dry_string);
-
-		fclose(fp3);
-
-		printf("\nADDED: %s\n", dry_string);
 
 		menu();
 	}
